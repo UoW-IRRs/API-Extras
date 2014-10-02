@@ -58,7 +58,7 @@ public class ReportGenerator {
 	static File rewriteDates(File file) throws IOException {
 		DateFormat solrDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		solrDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		DateFormat excelDateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
+		DateFormat excelDateFormat = new SimpleDateFormat("MMMMM yyyy");//SimpleDateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
 		excelDateFormat.setTimeZone(TimeZone.getDefault());
 
 		File rewrittenFile = File.createTempFile("report", ".csv");
