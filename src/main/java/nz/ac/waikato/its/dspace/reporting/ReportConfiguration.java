@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -58,7 +59,7 @@ public class ReportConfiguration {
 
 	public void setDateRange(String dateField, Date start, Date end) {
 		if (StringUtils.isNotBlank(dateField)) {
-			query.addFilterQuery(dateField + ":[" + dateToSolr(start) + " TO " + dateToSolr(end) + "]");
+			query.addFilterQuery(dateField + ":[" + dateToSolr(start, false) + " TO " + dateToSolr(end, true) + "]");
 		}
 	}
 
@@ -72,10 +73,15 @@ public class ReportConfiguration {
 		return new URL(baseURL + "/select?" + query.toString());
 	}
 
-	private String dateToSolr(Date date) {
+	private String dateToSolr(Date date, boolean pushForward) {
 		if (date == null) {
 			return "*";
-		}
+		} else if(pushForward){
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DATE, 1);
+            date = c.getTime();
+        }
 		return solrDateFormat.format(date);
 	}
 }
