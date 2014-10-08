@@ -2,6 +2,8 @@ package nz.ac.waikato.its.dspace.reporting;
 
 import nz.ac.waikato.its.dspace.reporting.configuration.*;
 
+import java.io.File;
+
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
  */
@@ -34,5 +36,13 @@ public class TestUtils {
 		report1.addField(new Field("handle", "AgScite_Handle"));
 
 		return report1;
+	}
+
+	static String getTestConfigDir() {
+		return new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath()).getParent();
+	}
+
+	static String getTestSolrServer() {
+		return "http://127.0.0.1:8080/solr/search";
 	}
 }

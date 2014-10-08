@@ -29,20 +29,4 @@ public class ReportsConfigurationTest {
 		Assert.assertEquals("Canned report size", configuration.getCannedReports().size(), reference.getCannedReports().size());
 	}
 
-	@Test
-	public void testMarshalConfiguration() throws JAXBException, IOException {
-		ReportsConfiguration configuration = TestUtils.makeFirstConfig();
-
-		JAXBContext jaxbContext = JAXBContext.newInstance(ReportsConfiguration.class);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-		File tempFile = File.createTempFile("config-marshal", ".xml");
-		tempFile.deleteOnExit();
-		jaxbMarshaller.marshal(configuration, tempFile);
-
-		Assert.assertTrue("Marshalled file", FileUtils.contentEquals(tempFile, new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath())));
-	}
-
 }

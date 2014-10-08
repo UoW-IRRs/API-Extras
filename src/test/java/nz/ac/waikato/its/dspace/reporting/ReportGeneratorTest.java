@@ -6,7 +6,6 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ public class ReportGeneratorTest {
 	public void testGetCannedReportConfig() {
 		Report config = null;
 		try {
-			String configDir = new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath()).getParent();
+			String configDir = TestUtils.getTestConfigDir();
 			config = new ReportConfigurationService(configDir).getCannedReportConfiguration("report1");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
@@ -33,7 +32,7 @@ public class ReportGeneratorTest {
 	public void testQueryResultsToFile() {
 		Report config = null;
 		try {
-			String configDir = new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath()).getParent();
+			String configDir = TestUtils.getTestConfigDir();
 			config = new ReportConfigurationService(configDir).getCannedReportConfiguration("report1");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
@@ -44,7 +43,7 @@ public class ReportGeneratorTest {
 
 		InputStream results;
 		try {
-			results = ReportGenerator.queryResultsToFile(config, "http://127.0.0.1:8080/solr/search", null, null);
+			results = ReportGenerator.queryResultsToFile(config, TestUtils.getTestSolrServer(), null, null);
 			Scanner scanner = new Scanner(results);
 			Assert.assertTrue(scanner.hasNextLine());
 			String firstLine = scanner.nextLine();
