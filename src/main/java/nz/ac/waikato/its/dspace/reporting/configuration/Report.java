@@ -29,7 +29,7 @@ public class Report {
 	@XmlElement
 	private String dateField;
 	@XmlElement(defaultValue = "10000")
-	private int maxResults;
+	private int maxResults = 10000;
 
 	private static final DateFormat solrDateFormat = DateUtil.getThreadLocalDateFormat();
 
@@ -134,5 +134,42 @@ public class Report {
 
 	public int getMaxResults() {
 		return maxResults;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Report report = (Report) o;
+
+		if (maxResults != report.maxResults) return false;
+		if (dateField != null ? !dateField.equals(report.dateField) : report.dateField != null) return false;
+		if (!fields.equals(report.fields)) return false;
+		if (!id.equals(report.id)) return false;
+		if (sorting != null ? !sorting.equals(report.sorting) : report.sorting != null) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id.hashCode();
+		result = 31 * result + fields.hashCode();
+		result = 31 * result + (sorting != null ? sorting.hashCode() : 0);
+		result = 31 * result + (dateField != null ? dateField.hashCode() : 0);
+		result = 31 * result + maxResults;
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Report{" +
+				       "id='" + id + '\'' +
+				       ", fields=" + fields +
+				       ", sorting=" + sorting +
+				       ", dateField='" + dateField + '\'' +
+				       ", maxResults=" + maxResults +
+				       '}';
 	}
 }
