@@ -1,6 +1,7 @@
 package nz.ac.waikato.its.dspace.reporting;
 
-import org.apache.commons.io.FileUtils;
+import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
+import nz.ac.waikato.its.dspace.reporting.configuration.Report;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,8 +9,6 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Scanner;
 
 /**
@@ -18,31 +17,25 @@ import java.util.Scanner;
 public class ReportGeneratorTest {
 	@Test
 	public void testGetCannedReportConfig() {
-		ReportConfiguration config = null;
+		Report config = null;
 		try {
-			config = new ReportConfigurationService("http://127.0.0.1:8080/solr/search").getCannedReportConfiguration(null, null, "canned-report-1");
-		} catch (ReportingConfigurationException e) {
+			String configDir = new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath()).getParent();
+			config = new ReportConfigurationService(configDir).getCannedReportConfiguration("report1");
+		} catch (ConfigurationException e) {
 			e.printStackTrace();
 			Assert.fail("Caught exception getting canned report config");
 		}
 		Assert.assertNotNull("Got non-null configuration object", config);
-		URL queryURL = null;
-		try {
-			queryURL = config.getQueryURL();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			Assert.fail("Caught exception getting query URL");
-		}
-		Assert.assertNotNull("Got non-null query URL object", queryURL);
-		Assert.assertEquals("Query string is as expected", "http://127.0.0.1:8080/solr/search/select?q=*%3A*&fq=withdrawn%3Afalse&fq=search.resourcetype%3A2&fq=dc.date.accessioned_dt%3A%5B*+TO+*%5D&wt=csv&csv.mv.separator=%7C&sort=dc.date.accessioned_dt+asc&rows=10000&fl=AgResearch_Group%3Aagresearch.organisation.group%2CAgResearch_Team%3Aagresearch.organisation.team%2COutput_Type%3Adc.type%2COutput_Subtype%3Aagresearch.subtype%2CTitle%3Adc.title%2CDate_Submitted%3Adc.date.accessioned_dt%2CCitation%3Adc.identifier.citation%2CAgScite_Handle%3Ahandle", queryURL.toString());
+		Assert.assertEquals("Id matches", "report1", config.getId());
 	}
 
 	@Test
 	public void testQueryResultsToFile() {
-		ReportConfiguration config = null;
+		Report config = null;
 		try {
-			config = new ReportConfigurationService("http://127.0.0.1:8080/solr/search").getCannedReportConfiguration(null, null, "canned-report-2");
-		} catch (ReportingConfigurationException e) {
+			String configDir = new File(ClassLoader.getSystemResource("reports-configuration.xml").getPath()).getParent();
+			config = new ReportConfigurationService(configDir).getCannedReportConfiguration("report1");
+		} catch (ConfigurationException e) {
 			e.printStackTrace();
 			Assert.fail("Caught exception getting canned report config");
 		}
@@ -51,7 +44,7 @@ public class ReportGeneratorTest {
 
 		InputStream results;
 		try {
-			results = ReportGenerator.queryResultsToFile(config);
+			results = ReportGenerator.queryResultsToFile(config, "http://127.0.0.1:8080/solr/search", null, null);
 			Scanner scanner = new Scanner(results);
 			Assert.assertTrue(scanner.hasNextLine());
 			String firstLine = scanner.nextLine();
@@ -62,16 +55,4 @@ public class ReportGeneratorTest {
 		}
 	}
 
-	@Test
-	public void testRewriteDates() {
-		File input = new File(ClassLoader.getSystemResource("solr-response.csv").getPath());
-		File expected = new File(ClassLoader.getSystemResource("rewritten-response.csv").getPath());
-		try {
-			File rewritten = ReportGenerator.rewriteDates(input);
-			System.out.println(rewritten.getAbsolutePath());
-			Assert.assertTrue("Rewritten file is not as expected", FileUtils.contentEquals(rewritten, expected));
-		} catch (IOException e) {
-			Assert.fail("Caught exception trying to rewrite file");
-		}
-	}
 }

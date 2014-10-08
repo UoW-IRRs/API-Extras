@@ -1,46 +1,34 @@
 package nz.ac.waikato.its.dspace.reporting;
 
-import org.apache.commons.lang.StringUtils;
-import org.dspace.core.ConfigurationManager;
+import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
+import nz.ac.waikato.its.dspace.reporting.configuration.Report;
+import nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Date;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
  */
 public class ReportConfigurationService {
-	private String solrServer;
+	private final String configDir;
 
-	public ReportConfigurationService(String solrServer) {
-		this.solrServer = solrServer;
+	public ReportConfigurationService(String configDir) {
+		this.configDir = configDir;
 	}
 
-	public ReportConfiguration getCannedReportConfiguration(Date start, Date end, String cannedReportName) throws ReportingConfigurationException {
-		if (StringUtils.isBlank(solrServer)) {
-			throw new ReportingConfigurationException("No solr server found");
-		}
-
-		ReportConfiguration config = new ReportConfiguration();
-
-		// hard code for now -- TODO read from config file
-		config.setBaseURL(solrServer);
-		config.setDateRange("dc.date.accessioned_dt", start, end);
-		config.setSortField("dc.date.accessioned_dt", true);
-		config.setMaxResults(10000);
+	public Report getCannedReportConfiguration(String cannedReportName) throws ConfigurationException {
 		try {
-			config.addResultField("agresearch.organisation.group", "AgResearch_Group");
-			config.addResultField("agresearch.organisation.team", "AgResearch_Team");
-			config.addResultField("dc.type", "Output_Type");
-			config.addResultField("agresearch.subtype", "Output_Subtype");
-			config.addResultField("dc.title", "Title");
-			config.addResultField("dc.date.accessioned_dt", "Date_Submitted");
-			config.addResultField("dc.identifier.citation", "Citation");
-			config.addResultField("handle", "AgScite_Handle");
-		} catch (UnsupportedEncodingException e) {
-			throw new ReportingConfigurationException("Problem adding header fields", e);
+			JAXBContext jaxbContext = JAXBContext.newInstance(ReportsConfiguration.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			File xml = new File(configDir, "reports-configuration.xml");
+
+			ReportsConfiguration configuration = (ReportsConfiguration) jaxbUnmarshaller.unmarshal(xml);
+			return configuration.getCannedReport(cannedReportName);
+		} catch (JAXBException e) {
+			throw new ConfigurationException("Could not load report configuration", e);
 		}
-		return config;
 	}
 }

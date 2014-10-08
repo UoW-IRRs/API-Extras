@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reportsConfiguration xmlns:ns2="nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration">
+    <cannedReports>
+        <report id="report1">
+            <sorting fieldName="dc.date.accessioned_dt">
+                <order>asc</order>
+            </sorting>
+            <dateField>dc.date.accessioned_dt</dateField>
+            <maxResults>10000</maxResults>
+            <fields>
+                <field name="agresearch.organisation.group" header="AgResearch_Group"/>
+                <field name="agresearch.organisation.team" header="AgResearch_Team"/>
+                <field name="dc.type" header="Output_Type"/>
+                <field name="agresearch.subtype" header="Output_Subtype"/>
+                <field name="dc.title" header="Title"/>
+                <field name="dc.date.accessioned_dt" header="Date_Submitted">
+                    <postProcess class="nz.ac.waikato.its.dspace.reporting.postprocess.ReformatDates">
+                        <params>
+                            <param name="format" value="MMMM YYYY"/>
+                        </params>
+                    </postProcess>
+                </field>
+                <field name="dc.identifier.citation" header="Citation"/>
+                <field name="handle" header="AgScite_Handle"/>
+            </fields>
+        </report>
+    </cannedReports>
+</reportsConfiguration>

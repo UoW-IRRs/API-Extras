@@ -1,22 +1,17 @@
 package nz.ac.waikato.its.dspace.reporting;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
+import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
+import nz.ac.waikato.its.dspace.reporting.configuration.Report;
+import nz.ac.waikato.its.dspace.reporting.postprocess.PostProcessingHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.common.util.DateUtil;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Email;
 import org.dspace.core.I18nUtil;
 
 import javax.mail.MessagingException;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
@@ -25,18 +20,20 @@ public class ReportGenerator {
 
 	public static final String EMAIL_TEMPLATE_NAME = "uow_reporting_email";
 
-	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ReportingConfigurationException {
-		ReportConfigurationService configurationService = new ReportConfigurationService(ConfigurationManager.getProperty("discovery", "search.server"));
-		ReportConfiguration config = configurationService.getCannedReportConfiguration(start, end, cannedReportName);
+	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ConfigurationException {
+		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config";
+		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
+		ReportConfigurationService configurationService = new ReportConfigurationService(configDir);
+		Report config = configurationService.getCannedReportConfiguration(cannedReportName);
 		InputStream reportDataStream;
 		try {
-			reportDataStream = queryResultsToFile(config);
+			reportDataStream = queryResultsToFile(config, solrServer, start, end);
 		} catch (SolrServerException e) {
 			throw new ReportingException("Problem obtaining report data", e);
 		}
 		Email email = Email.getEmail(I18nUtil.getEmailFilename(I18nUtil.getDefaultLocale(), "uow_report_email"));
 		if (email == null) {
-			throw new ReportingConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME);
+			throw new ConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME);
 		}
 		email.addAttachment(reportDataStream, "agscite-report.csv", "text/csv;charset=UTF-8");
 		email.addRecipient(recipient);
@@ -47,45 +44,13 @@ public class ReportGenerator {
 		email.send();
 	}
 
-	public static InputStream queryResultsToFile(ReportConfiguration config) throws SolrServerException, IOException {
+	public static InputStream queryResultsToFile(Report config, String solrServer, Date start, Date end) throws SolrServerException, IOException {
 		File tempFile = File.createTempFile("report-solr", ".csv");
 		tempFile.deleteOnExit();
-		FileUtils.copyURLToFile(config.getQueryURL(), tempFile);
-		tempFile = rewriteDates(tempFile);
-		return new BufferedInputStream(new FileInputStream(tempFile));
-	}
-
-	static File rewriteDates(File file) throws IOException {
-		DateFormat solrDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		solrDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		DateFormat excelDateFormat = new SimpleDateFormat("MMMMM yyyy");//SimpleDateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
-		excelDateFormat.setTimeZone(TimeZone.getDefault());
-
-		File rewrittenFile = File.createTempFile("report", ".csv");
-		rewrittenFile.deleteOnExit();
-		CSVWriter writer = new CSVWriter(new FileWriter(rewrittenFile));
-
-		try (CSVReader reader = new CSVReader(new FileReader(file))) {
-			String[] line = reader.readNext();
-			while (line != null) {
-				for (int i = 0; i < line.length; i++) {
-					String field = line[i];
-					try {
-						Date date = solrDateFormat.parse(field);
-						line[i] = excelDateFormat.format(date);
-					} catch (ParseException e) {
-						// not a date, ignore
-					}
-				}
-				writer.writeNext(line);
-				line = reader.readNext();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			writer.close();
-		}
-		return rewrittenFile;
+		FileUtils.copyURLToFile(config.toQueryURL(solrServer, start, end), tempFile);
+		File result = PostProcessingHelper.runPostProcessors(config, tempFile);
+		result.deleteOnExit();
+		return new BufferedInputStream(new FileInputStream(result));
 	}
 
 	public static void main(String[] args) {
@@ -98,7 +63,7 @@ public class ReportGenerator {
 
 		try {
 			emailReport(null, null, reportName, recipient);
-		} catch (IOException | MessagingException | ReportingException | ReportingConfigurationException e) {
+		} catch (IOException | MessagingException | ReportingException | ConfigurationException e) {
 			e.printStackTrace(System.err);
 		}
 	}
