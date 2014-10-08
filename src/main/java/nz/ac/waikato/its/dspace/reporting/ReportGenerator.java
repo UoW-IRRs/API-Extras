@@ -21,7 +21,7 @@ public class ReportGenerator {
 	public static final String EMAIL_TEMPLATE_NAME = "uow_reporting_email";
 
 	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ConfigurationException {
-		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config";
+		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
 		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
 		ReportConfigurationService configurationService = new ReportConfigurationService(configDir);
 		Report config = configurationService.getCannedReportConfiguration(cannedReportName);
