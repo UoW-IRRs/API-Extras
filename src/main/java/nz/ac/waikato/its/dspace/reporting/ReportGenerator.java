@@ -11,6 +11,7 @@ import org.dspace.core.I18nUtil;
 
 import javax.mail.MessagingException;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,10 +22,12 @@ public class ReportGenerator {
 	public static final String EMAIL_TEMPLATE_NAME = "uow_reporting_email";
 
 	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ConfigurationException {
-		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
 		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
 		ReportConfigurationService configurationService = new ReportConfigurationService(configDir);
 		Report config = configurationService.getCannedReportConfiguration(cannedReportName);
+        String reportTitle = config.getTitle();
 		InputStream reportDataStream;
 		try {
 			reportDataStream = queryResultsToFile(config, solrServer, start, end);
@@ -35,11 +38,12 @@ public class ReportGenerator {
 		if (email == null) {
 			throw new ConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME);
 		}
-		email.addAttachment(reportDataStream, "agscite-report.csv", "text/csv;charset=UTF-8");
+        String fileName = createFilename(config, start, end);
+		email.addAttachment(reportDataStream, fileName+".csv", "text/csv;charset=UTF-8");
 		email.addRecipient(recipient);
-		email.addArgument(cannedReportName);
-		email.addArgument(start);
-		email.addArgument(end);
+		email.addArgument(reportTitle);
+		email.addArgument(sdf.format(start));
+		email.addArgument(sdf.format(end));
 
 		email.send();
 	}
@@ -67,4 +71,29 @@ public class ReportGenerator {
 			e.printStackTrace(System.err);
 		}
 	}
+
+    private static String createFilename(Report config, Date start, Date end) {
+        if(config == null || start == null || end == null){
+            return "agscite-report";
+        }
+        String reportName = config.getTitle().toLowerCase();
+        if(reportName == null || reportName.equals("")){
+            return "agscite-report";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        reportName = toTitleCase(reportName) + sdf.format(start) + "To" + sdf.format(end);
+        reportName = reportName.replaceAll("\\s","");
+        return reportName;
+    }
+
+    private static String toTitleCase(String givenString) {
+        String[] arr = givenString.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                    .append(arr[i].substring(1)).append(" ");
+        }
+        return sb.toString().trim();
+    }
 }

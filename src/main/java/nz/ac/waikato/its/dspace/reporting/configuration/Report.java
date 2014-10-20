@@ -17,13 +17,15 @@ import java.util.*;
  */
 @XmlRootElement(namespace = "nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"sorting", "dateField", "maxResults", "fields"})
+@XmlType(propOrder = {"title", "sorting", "dateField", "maxResults", "fields"})
 public class Report {
 	@XmlAttribute(required = true)
 	private String id;
 	@XmlElementWrapper(name = "fields")
 	@XmlElement(name = "field")
 	private List<Field> fields = new ArrayList<>();
+    @XmlElement
+    private String title;
 	@XmlElement
 	private Sorting sorting;
 	@XmlElement
@@ -78,6 +80,14 @@ public class Report {
 	public void setSorting(Sorting sorting) {
 		this.sorting = sorting;
 	}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
 	public URL toQueryURL(String solrServer, Date start, Date end) throws MalformedURLException, UnsupportedEncodingException {
 		SolrQuery query = new SolrQuery("*:*");
@@ -147,6 +157,7 @@ public class Report {
 		if (dateField != null ? !dateField.equals(report.dateField) : report.dateField != null) return false;
 		if (!fields.equals(report.fields)) return false;
 		if (!id.equals(report.id)) return false;
+        if (!title.equals(report.title)) return false;
 		if (sorting != null ? !sorting.equals(report.sorting) : report.sorting != null) return false;
 
 		return true;
@@ -158,6 +169,7 @@ public class Report {
 		result = 31 * result + fields.hashCode();
 		result = 31 * result + (sorting != null ? sorting.hashCode() : 0);
 		result = 31 * result + (dateField != null ? dateField.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
 		result = 31 * result + maxResults;
 		return result;
 	}
@@ -166,6 +178,7 @@ public class Report {
 	public String toString() {
 		return "Report{" +
 				       "id='" + id + '\'' +
+                       ", title=" + title +
 				       ", fields=" + fields +
 				       ", sorting=" + sorting +
 				       ", dateField='" + dateField + '\'' +
