@@ -19,7 +19,7 @@ public class TestUtils {
 		report1.setSorting(new Sorting("dc.date.accessioned_dt", Sorting.Order.ASC));
 		report1.setDateField("dc.date.accessioned_dt");
 		report1.setMaxResults(10000);
-
+        report1.setTitle("All outputs by Group and Team");
 		report1.addField(new Field("agresearch.organisation.group", "AgResearch_Group"));
 		report1.addField(new Field("agresearch.organisation.team", "AgResearch_Team"));
 		report1.addField(new Field("dc.type", "Output_Type"));
