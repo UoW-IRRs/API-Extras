@@ -9,8 +9,8 @@
             <dateField>dc.date.accessioned_dt</dateField>
             <maxResults>10000</maxResults>
             <fields>
-                <field name="agresearch.organisation.group" header="AgResearch_Group"/>
-                <field name="agresearch.organisation.team" header="AgResearch_Team"/>
+                <field name="group_keyword" header="AgResearch_Group"/>
+                <field name="team_keyword" header="AgResearch_Team"/>
                 <field name="dc.type" header="Output_Type"/>
                 <field name="agresearch.subtype" header="Output_Subtype"/>
                 <field name="dc.title" header="Title"/>

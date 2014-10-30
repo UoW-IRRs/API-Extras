@@ -1,6 +1,7 @@
 package nz.ac.waikato.its.dspace.reporting;
 
 import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
+import nz.ac.waikato.its.dspace.reporting.configuration.Field;
 import nz.ac.waikato.its.dspace.reporting.configuration.Report;
 import nz.ac.waikato.its.dspace.reporting.postprocess.PostProcessingHelper;
 import org.apache.commons.io.FileUtils;
@@ -13,6 +14,7 @@ import javax.mail.MessagingException;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
@@ -96,4 +98,9 @@ public class ReportGenerator {
         }
         return sb.toString().trim();
     }
+
+	public static List<String> getPickableValues(Report config, Field field) throws ReportingException {
+		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
+		return config.getPickableValues(field, solrServer);
+	}
 }

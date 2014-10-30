@@ -1,7 +1,12 @@
 package nz.ac.waikato.its.dspace.reporting.configuration;
 
+import nz.ac.waikato.its.dspace.reporting.ReportingException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.response.FacetField;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.util.DateUtil;
 
 import javax.xml.bind.annotation.*;
@@ -90,10 +95,7 @@ public class Report {
     }
 
 	public URL toQueryURL(String solrServer, Date start, Date end) throws MalformedURLException, UnsupportedEncodingException {
-		SolrQuery query = new SolrQuery("*:*");
-		// only include live items
-		query.addFilterQuery("withdrawn:false");
-		query.addFilterQuery("search.resourcetype:2");
+		SolrQuery query = getBasicSolrQuery();
 
 		// csv settings
 		query.add("wt", "csv");
@@ -120,6 +122,14 @@ public class Report {
 		query.setRows(maxResults);
 
 		return new URL(solrServer + "/select?" + query.toString());
+	}
+
+	private SolrQuery getBasicSolrQuery() {
+		SolrQuery query = new SolrQuery("*:*");
+		// only include live items
+		query.addFilterQuery("withdrawn:false");
+		query.addFilterQuery("search.resourcetype:2");
+		return query;
 	}
 
 	public URL toQueryURL(String solrServer) throws MalformedURLException, UnsupportedEncodingException {
@@ -184,5 +194,40 @@ public class Report {
 				       ", dateField='" + dateField + '\'' +
 				       ", maxResults=" + maxResults +
 				       '}';
+	}
+
+	public List<String> getPickableValues(Field field, String solrServer) throws ReportingException {
+		if (!fields.contains(field)) {
+			throw new IllegalArgumentException("This report doesn't contain the specified field " + field);
+		}
+		if (field.getValuesMode() != Field.ValuesMode.PICK) {
+			throw new IllegalArgumentException("This field isn't pickable " + field);
+		}
+
+		List<String> result = new ArrayList<>();
+
+		HttpSolrServer solr = new HttpSolrServer(solrServer);
+		SolrQuery query = toPickableValuesQuery(field.getName());
+		try {
+			QueryResponse response = solr.query(query);
+			FacetField facetField = response.getFacetField(field.getName());
+			List<FacetField.Count> values = facetField.getValues();
+			for (FacetField.Count value : values) {
+				result.add(value.getName());
+			}
+			Collections.sort(result);
+		} catch (SolrServerException e) {
+			throw new ReportingException("Could not determine pickable values", e);
+		}
+		return result;
+	}
+
+	SolrQuery toPickableValuesQuery(String name) {
+		SolrQuery query = getBasicSolrQuery();
+		query.setFacet(true);
+		query.setFacetMinCount(1);
+		query.setFacetLimit(maxResults);
+		query.addFacetField(name);
+		return query;
 	}
 }

@@ -20,8 +20,8 @@ public class TestUtils {
 		report1.setDateField("dc.date.accessioned_dt");
 		report1.setMaxResults(10000);
         report1.setTitle("All outputs by Group and Team");
-		report1.addField(new Field("agresearch.organisation.group", "AgResearch_Group"));
-		report1.addField(new Field("agresearch.organisation.team", "AgResearch_Team"));
+		report1.addField(new Field("group_keyword", "AgResearch_Group"));
+		report1.addField(new Field("team_keyword", "AgResearch_Team"));
 		report1.addField(new Field("dc.type", "Output_Type"));
 		report1.addField(new Field("agresearch.subtype", "Output_Subtype"));
 		report1.addField(new Field("dc.title", "Title"));

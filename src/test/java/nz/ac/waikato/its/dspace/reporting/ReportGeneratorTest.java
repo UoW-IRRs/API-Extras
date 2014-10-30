@@ -1,6 +1,7 @@
 package nz.ac.waikato.its.dspace.reporting;
 
 import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
+import nz.ac.waikato.its.dspace.reporting.configuration.Field;
 import nz.ac.waikato.its.dspace.reporting.configuration.Report;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Assert;
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Scanner;
 
 /**
