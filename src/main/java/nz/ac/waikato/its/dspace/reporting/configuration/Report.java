@@ -98,11 +98,11 @@ public class Report {
 		return toQueryURL(solrServer, start, end, null);
 	}
 
-	public URL toQueryURL(String solrServer, Date start, Date end, Map<Field, List<String>> pickedValues) throws MalformedURLException, UnsupportedEncodingException {
+	public URL toQueryURL(String solrServer, Date start, Date end, Map<String, List<String>> pickedValues) throws MalformedURLException, UnsupportedEncodingException {
 		SolrQuery query = getBasicSolrQuery();
 
 		if (pickedValues != null && !pickedValues.isEmpty()) {
-			for (Field field : pickedValues.keySet()) {
+			for (String field : pickedValues.keySet()) {
 				List<String> values = pickedValues.get(field);
 				if (values == null || values.isEmpty()) {
 					continue; // skip this field
@@ -120,7 +120,7 @@ public class Report {
 					filterBuilder.append("\"");
 				}
 				filterBuilder.append(")");
-				query.addFilterQuery(field.getName() + ":" + filterBuilder.toString());
+				query.addFilterQuery(field + ":" + filterBuilder.toString());
 			}
 		}
 

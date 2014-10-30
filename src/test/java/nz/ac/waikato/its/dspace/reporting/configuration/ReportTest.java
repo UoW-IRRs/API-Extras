@@ -40,8 +40,8 @@ public class ReportTest {
 
 		Field pickField = TestUtils.findPickField(config);
 		Assert.assertNotNull("Pick field non-null", pickField);
-		Map<Field, List<String>> pickedValues = new HashMap<>();
-		pickedValues.put(pickField, Arrays.asList(new String[] {"Innovative Farm Systems", "Food & Bio-based Products"}));
+		Map<String, List<String>> pickedValues = new HashMap<>();
+		pickedValues.put(pickField.getName(), Arrays.asList(new String[] {"Innovative Farm Systems", "Food & Bio-based Products"}));
 
 		URL queryURL = null;
 		try {

@@ -25,7 +25,7 @@ public class ReportGenerator {
 
 	public static final String EMAIL_TEMPLATE_NAME = "uow_reporting_email";
 
-	public static void emailReport(Date start, Date end, String cannedReportName, String recipient, Map<Field, List<String>> pickedValues) throws IOException, MessagingException, ReportingException, ConfigurationException {
+	public static void emailReport(Date start, Date end, String cannedReportName, String recipient, Map<String, List<String>> pickedValues) throws IOException, MessagingException, ReportingException, ConfigurationException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
 		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
@@ -56,10 +56,10 @@ public class ReportGenerator {
 		emailReport(start, end, cannedReportName, recipient, null);
 	}
 
-	public static InputStream queryResultsToFile(Report config, String solrServer, Date start, Date end, Map<Field, List<String>> pickedValues) throws SolrServerException, IOException {
+	public static InputStream queryResultsToFile(Report config, String solrServer, Date start, Date end, Map<String, List<String>> pickedValues) throws SolrServerException, IOException {
 		File tempFile = File.createTempFile("report-solr", ".csv");
 		tempFile.deleteOnExit();
-		FileUtils.copyURLToFile(config.toQueryURL(solrServer, start, end), tempFile);
+		FileUtils.copyURLToFile(config.toQueryURL(solrServer, start, end, pickedValues), tempFile);
 		File result = PostProcessingHelper.runPostProcessors(config, tempFile);
 		result.deleteOnExit();
 		return new BufferedInputStream(new FileInputStream(result));

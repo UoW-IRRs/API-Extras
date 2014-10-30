@@ -18,7 +18,7 @@ public class Field {
 	private String name;
 	@XmlAttribute
 	private String header;
-	@XmlElement(defaultValue = "all")
+	@XmlAttribute
 	private ValuesMode valuesMode = ValuesMode.ALL;
 	@XmlElement
 	private PostProcess postProcess;

@@ -26,7 +26,7 @@
             </fields>
         </report>
         <report id="report2">
-            <title>All outputs for given Groups</title>
+            <title>Group outputs</title>
             <sorting fieldName="dc.date.accessioned_dt">
                 <order>asc</order>
             </sorting>
