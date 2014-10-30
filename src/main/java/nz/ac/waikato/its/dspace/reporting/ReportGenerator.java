@@ -13,8 +13,10 @@ import org.dspace.core.I18nUtil;
 import javax.mail.MessagingException;
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
@@ -23,16 +25,16 @@ public class ReportGenerator {
 
 	public static final String EMAIL_TEMPLATE_NAME = "uow_reporting_email";
 
-	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ConfigurationException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
+	public static void emailReport(Date start, Date end, String cannedReportName, String recipient, Map<Field, List<String>> pickedValues) throws IOException, MessagingException, ReportingException, ConfigurationException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
 		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
 		ReportConfigurationService configurationService = new ReportConfigurationService(configDir);
 		Report config = configurationService.getCannedReportConfiguration(cannedReportName);
-        String reportTitle = config.getTitle();
+		String reportTitle = config.getTitle();
 		InputStream reportDataStream;
 		try {
-			reportDataStream = queryResultsToFile(config, solrServer, start, end);
+			reportDataStream = queryResultsToFile(config, solrServer, start, end, pickedValues);
 		} catch (SolrServerException e) {
 			throw new ReportingException("Problem obtaining report data", e);
 		}
@@ -40,7 +42,7 @@ public class ReportGenerator {
 		if (email == null) {
 			throw new ConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME);
 		}
-        String fileName = createFilename(config, start, end);
+		String fileName = createFilename(config, start, end);
 		email.addAttachment(reportDataStream, fileName+".csv", "text/csv;charset=UTF-8");
 		email.addRecipient(recipient);
 		email.addArgument(reportTitle);
@@ -50,7 +52,11 @@ public class ReportGenerator {
 		email.send();
 	}
 
-	public static InputStream queryResultsToFile(Report config, String solrServer, Date start, Date end) throws SolrServerException, IOException {
+	public static void emailReport(Date start, Date end, String cannedReportName, String recipient) throws IOException, MessagingException, ReportingException, ConfigurationException {
+		emailReport(start, end, cannedReportName, recipient, null);
+	}
+
+	public static InputStream queryResultsToFile(Report config, String solrServer, Date start, Date end, Map<Field, List<String>> pickedValues) throws SolrServerException, IOException {
 		File tempFile = File.createTempFile("report-solr", ".csv");
 		tempFile.deleteOnExit();
 		FileUtils.copyURLToFile(config.toQueryURL(solrServer, start, end), tempFile);

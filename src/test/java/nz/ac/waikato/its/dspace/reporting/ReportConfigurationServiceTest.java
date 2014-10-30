@@ -31,7 +31,7 @@ public class ReportConfigurationServiceTest {
 	@Test
 	public void testGetReportNamesFromConfig() throws ConfigurationException {
 		List<String> namesFromService = service.getCannedReportNames();
-		List<String> expected = Arrays.asList(new String[] {"report1"});
+		List<String> expected = Arrays.asList(new String[] {"report1", "report2"});
 		Assert.assertEquals("Report names from configuration service", expected, namesFromService);
 	}
 }

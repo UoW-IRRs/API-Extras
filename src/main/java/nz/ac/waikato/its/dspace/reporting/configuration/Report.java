@@ -95,7 +95,34 @@ public class Report {
     }
 
 	public URL toQueryURL(String solrServer, Date start, Date end) throws MalformedURLException, UnsupportedEncodingException {
+		return toQueryURL(solrServer, start, end, null);
+	}
+
+	public URL toQueryURL(String solrServer, Date start, Date end, Map<Field, List<String>> pickedValues) throws MalformedURLException, UnsupportedEncodingException {
 		SolrQuery query = getBasicSolrQuery();
+
+		if (pickedValues != null && !pickedValues.isEmpty()) {
+			for (Field field : pickedValues.keySet()) {
+				List<String> values = pickedValues.get(field);
+				if (values == null || values.isEmpty()) {
+					continue; // skip this field
+				}
+				StringBuilder filterBuilder = new StringBuilder("(");
+				boolean first = true;
+				for (String value : values) {
+					if (first) {
+						first = false;
+					} else {
+						filterBuilder.append(" OR ");
+					}
+					filterBuilder.append("\"");
+					filterBuilder.append(value);
+					filterBuilder.append("\"");
+				}
+				filterBuilder.append(")");
+				query.addFilterQuery(field.getName() + ":" + filterBuilder.toString());
+			}
+		}
 
 		// csv settings
 		query.add("wt", "csv");
@@ -130,10 +157,6 @@ public class Report {
 		query.addFilterQuery("withdrawn:false");
 		query.addFilterQuery("search.resourcetype:2");
 		return query;
-	}
-
-	public URL toQueryURL(String solrServer) throws MalformedURLException, UnsupportedEncodingException {
-		return toQueryURL(solrServer, null, null);
 	}
 
 	private String dateToSolr(Date date, boolean pushForward) {
@@ -230,4 +253,5 @@ public class Report {
 		query.addFacetField(name);
 		return query;
 	}
+
 }

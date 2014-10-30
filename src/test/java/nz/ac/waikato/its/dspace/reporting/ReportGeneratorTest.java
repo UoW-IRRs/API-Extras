@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -45,7 +44,7 @@ public class ReportGeneratorTest {
 
 		InputStream results;
 		try {
-			results = ReportGenerator.queryResultsToFile(config, TestUtils.getTestSolrServer(), null, null);
+			results = ReportGenerator.queryResultsToFile(config, TestUtils.getTestSolrServer(), null, null, null);
 			Scanner scanner = new Scanner(results);
 			Assert.assertTrue(scanner.hasNextLine());
 			String firstLine = scanner.nextLine();
