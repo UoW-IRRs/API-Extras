@@ -3,7 +3,7 @@ package nz.ac.waikato.its.dspace.exportcitation.converters;
 import nz.ac.waikato.its.dspace.exportcitation.Converter;
 import nz.ac.waikato.its.dspace.exportcitation.EndnoteExportCrosswalk;
 import org.apache.commons.lang.StringUtils;
-import org.dspace.content.DCValue;
+import org.dspace.content.Metadatum;
 import org.dspace.content.Item;
 
 import java.util.*;
@@ -21,7 +21,7 @@ public class AgResearchEndnoteTypeConverter implements Converter {
 	private static final String PLACE_PUBLISHED_RIS = "CY";
 
 	@Override
-	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, DCValue[] values, Item item) {
+	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, Metadatum[] values, Item item) {
 		String dspaceType = findFirstNonBlank(values);
 
 		Map<String, List<String>> additionalLines = null;
@@ -37,14 +37,14 @@ public class AgResearchEndnoteTypeConverter implements Converter {
 			endnoteType = "CPAPER";
 			additionalLines = makeConferenceExtraFields(item);
 		} else if ("Article".equals(dspaceType)) {
-			String subtype = findFirstNonBlank(item.getMetadata(SUBTYPE_FIELD));
+			String subtype = findFirstNonBlank(item.getMetadataByMetadataString(SUBTYPE_FIELD));
 			if ("Peer reviewed (refereed)".equalsIgnoreCase(subtype)) {
 				endnoteType = "JOUR";
 			} else {
 				endnoteType = "MGZN";
 			}
 		} else if ("Book/Chapter".equalsIgnoreCase(dspaceType)) {
-			String subtype = findFirstNonBlank(item.getMetadata(SUBTYPE_FIELD));
+			String subtype = findFirstNonBlank(item.getMetadataByMetadataString(SUBTYPE_FIELD));
 			if ("Book".equalsIgnoreCase(subtype)) {
 				endnoteType = "BOOK";
 			} else if ("Chapter".equalsIgnoreCase(subtype)) {
@@ -70,7 +70,7 @@ public class AgResearchEndnoteTypeConverter implements Converter {
 
 	private Map<String, List<String>> makeConferenceExtraFields(Item item) {
 		Map<String, List<String>> result = new TreeMap<>();
-		String place = findFirstNonBlank(item.getMetadata(PLACE_FIELD));
+		String place = findFirstNonBlank(item.getMetadataByMetadataString(PLACE_FIELD));
 		if (StringUtils.isNotBlank(place)) {
 			result.put(PLACE_PUBLISHED_RIS, Arrays.asList(place));
 		}
@@ -79,13 +79,13 @@ public class AgResearchEndnoteTypeConverter implements Converter {
 
 	private Map<String, List<String>> makeTechTransferExtraFields(Item item) {
 		Map<String, List<String>> result = new TreeMap<>();
-		String subtype = findFirstNonBlank(item.getMetadata(SUBTYPE_FIELD));
+		String subtype = findFirstNonBlank(item.getMetadataByMetadataString(SUBTYPE_FIELD));
 		if ("Manual".equalsIgnoreCase(subtype) || "User group booklet".equalsIgnoreCase(subtype)) {
 			result.put(SECONDARY_TITLE_RIS, Arrays.asList(subtype));
 		}
 		if ("User group presentation".equalsIgnoreCase(subtype) || "Professional group".equalsIgnoreCase(subtype)) {
-			String audience = findFirstNonBlank(item.getMetadata(AUDIENCE_FIELD));
-			String place = findFirstNonBlank(item.getMetadata(PLACE_FIELD));
+			String audience = findFirstNonBlank(item.getMetadataByMetadataString(AUDIENCE_FIELD));
+			String place = findFirstNonBlank(item.getMetadataByMetadataString(PLACE_FIELD));
 
 			if (StringUtils.isNotBlank(audience) || StringUtils.isNotBlank(place)) {
 				StringBuilder secondaryTitle = new StringBuilder("Presentation");
@@ -103,8 +103,8 @@ public class AgResearchEndnoteTypeConverter implements Converter {
 		return result;
 	}
 
-	private String findFirstNonBlank(DCValue[] values) {
-		for (DCValue value : values) {
+	private String findFirstNonBlank(Metadatum[] values) {
+		for (Metadatum value : values) {
 			if (StringUtils.isNotBlank(value.value)) {
 				return value.value;
 			}

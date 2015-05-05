@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReportGenerator {
 

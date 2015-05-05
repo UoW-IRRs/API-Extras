@@ -4,7 +4,7 @@ import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
 import nz.ac.waikato.its.dspace.reporting.configuration.PostProcess;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public interface PostProcessor {
 	/**

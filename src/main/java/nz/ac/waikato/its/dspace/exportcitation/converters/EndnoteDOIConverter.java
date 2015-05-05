@@ -3,8 +3,8 @@ package nz.ac.waikato.its.dspace.exportcitation.converters;
 import nz.ac.waikato.its.dspace.exportcitation.Converter;
 import nz.ac.waikato.its.dspace.exportcitation.EndnoteExportCrosswalk;
 import org.apache.commons.lang.StringUtils;
-import org.dspace.content.DCValue;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
 
 import java.util.Objects;
 import java.util.Properties;
@@ -18,8 +18,8 @@ public class EndnoteDOIConverter implements Converter {
 	private String prefix;
 
 	@Override
-	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, DCValue[] values, Item item) {
-		for (DCValue value : values) {
+	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, Metadatum[] values, Item item) {
+		for (Metadatum value : values) {
 			if (StringUtils.isNotBlank(value.value)) {
 				String doiString = Objects.toString(prefix, DEFAULT_PREFIX) + value.value;
 				EndnoteExportCrosswalk.appendLine(builder, risFieldName, doiString);

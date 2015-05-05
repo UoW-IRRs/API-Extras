@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReformatDates implements PostProcessor {
 

@@ -1,18 +1,17 @@
 package nz.ac.waikato.its.dspace.reporting;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import junit.framework.Assert;
 import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
 import nz.ac.waikato.its.dspace.reporting.configuration.Field;
 import nz.ac.waikato.its.dspace.reporting.configuration.Report;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReportConfigurationServiceTest {
 
@@ -42,7 +41,7 @@ public class ReportConfigurationServiceTest {
 	@Test
 	public void testGetReportNamesFromConfig() throws ConfigurationException {
 		List<String> namesFromService = service.getCannedReportNames();
-		List<String> expected = Arrays.asList(new String[] {"report1", "report2"});
+		List<String> expected = Arrays.asList("report1", "report2");
 		Assert.assertEquals("Report names from configuration service", expected, namesFromService);
 	}
 }

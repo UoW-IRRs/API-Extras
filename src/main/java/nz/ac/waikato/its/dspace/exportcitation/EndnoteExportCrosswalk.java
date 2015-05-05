@@ -3,9 +3,9 @@ package nz.ac.waikato.its.dspace.exportcitation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
-import org.dspace.content.DCValue;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
 import org.dspace.content.crosswalk.CrosswalkException;
 import org.dspace.content.crosswalk.StreamDisseminationCrosswalk;
 import org.dspace.core.ConfigurationManager;
@@ -147,13 +147,13 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 			String[] mdFields = fieldValue.split(","); // multiple md fields might be involved
 
 			for (String mdField : mdFields) {
-				DCValue[] values = item.getMetadata(mdField);
+				Metadatum[] values = item.getMetadataByMetadataString(mdField);
 				if (values != null && values.length > 0) {
 					//we have found a value
 					if (converter != null) {
 						converter.appendOutput(result, field, mdField, values, item);
 					} else {
-						for (DCValue value : values) {
+						for (Metadatum value : values) {
 							if (StringUtils.isNotBlank(value.value)) {
 								appendLine(result, field, value.value);
 							}

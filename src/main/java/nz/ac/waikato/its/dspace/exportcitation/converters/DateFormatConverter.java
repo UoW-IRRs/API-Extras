@@ -4,22 +4,22 @@ import nz.ac.waikato.its.dspace.exportcitation.Converter;
 import nz.ac.waikato.its.dspace.exportcitation.EndnoteExportCrosswalk;
 import org.apache.commons.lang.StringUtils;
 import org.dspace.content.DCDate;
-import org.dspace.content.DCValue;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
 
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch and the LCoNZ Institutional Research Repositories
  */
 public class DateFormatConverter implements Converter {
 
 	private SimpleDateFormat formatter;
 
 	@Override
-	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, DCValue[] values, Item item) {
-		for (DCValue value : values) {
+	public void appendOutput(StringBuilder builder, String risFieldName, String mdFieldName, Metadatum[] values, Item item) {
+		for (Metadatum value : values) {
 			if (StringUtils.isNotBlank(value.value)) {
 				String formattedDate = value.value;
 				if (formatter != null) {

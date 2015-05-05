@@ -1,7 +1,7 @@
 package nz.ac.waikato.its.dspace.reporting.postprocess;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class PostProcessingException extends Exception {
 	public PostProcessingException(String message) {

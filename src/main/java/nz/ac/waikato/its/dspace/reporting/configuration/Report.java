@@ -18,7 +18,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 @XmlRootElement(namespace = "nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration")
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class TestUtils {
 	public static ReportsConfiguration makeFirstConfig() {

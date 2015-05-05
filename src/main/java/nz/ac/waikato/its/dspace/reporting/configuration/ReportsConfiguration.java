@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)

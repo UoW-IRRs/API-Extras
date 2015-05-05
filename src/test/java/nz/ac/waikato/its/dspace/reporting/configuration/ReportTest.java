@@ -1,7 +1,5 @@
 package nz.ac.waikato.its.dspace.reporting.configuration;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-import nz.ac.waikato.its.dspace.reporting.ReportingException;
 import nz.ac.waikato.its.dspace.reporting.TestUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.junit.Assert;
@@ -10,12 +8,13 @@ import org.junit.Test;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReportTest {
 	@Test
@@ -41,7 +40,7 @@ public class ReportTest {
 		Field pickField = TestUtils.findPickField(config);
 		Assert.assertNotNull("Pick field non-null", pickField);
 		Map<String, List<String>> pickedValues = new HashMap<>();
-		pickedValues.put(pickField.getName(), Arrays.asList(new String[] {"Innovative Farm Systems", "Food & Bio-based Products"}));
+		pickedValues.put(pickField.getName(), Arrays.asList("Innovative Farm Systems", "Food & Bio-based Products"));
 
 		URL queryURL = null;
 		try {

@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReportGeneratorTest {
 	@Test

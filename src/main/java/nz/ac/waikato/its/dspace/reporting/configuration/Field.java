@@ -3,7 +3,7 @@ package nz.ac.waikato.its.dspace.reporting.configuration;
 import javax.xml.bind.annotation.*;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Field {

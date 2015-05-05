@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResarch
  */
 public class PostProcessingHelper {
 	public static PostProcessor getInstance(PostProcess config) throws ConfigurationException {

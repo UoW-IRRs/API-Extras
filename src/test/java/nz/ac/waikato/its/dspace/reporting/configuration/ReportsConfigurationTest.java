@@ -2,18 +2,15 @@ package nz.ac.waikato.its.dspace.reporting.configuration;
 
 import junit.framework.Assert;
 import nz.ac.waikato.its.dspace.reporting.TestUtils;
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
  */
 public class ReportsConfigurationTest {
 	@Test
