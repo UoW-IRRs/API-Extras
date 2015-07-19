@@ -41,7 +41,7 @@ public class Report {
 	private static final DateFormat solrDateFormat = DateUtil.getThreadLocalDateFormat();
 
 	static {
-		solrDateFormat.setTimeZone(TimeZone.getDefault());
+		solrDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
 	public Report() { } // no-arg constructor needed by JAXB
