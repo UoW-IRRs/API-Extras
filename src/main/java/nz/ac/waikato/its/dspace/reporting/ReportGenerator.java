@@ -24,6 +24,8 @@ public class ReportGenerator {
 
 	public static void emailReport(Date start, Date end, String cannedReportName, String recipient, Map<String, List<String>> pickedValues) throws IOException, MessagingException, ReportingException, ConfigurationException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		sdf.setTimeZone(TimeZone.getDefault());
+
 		String configDir = ConfigurationManager.getProperty("dspace.dir") + "/config/modules/reporting";
 		String solrServer = ConfigurationManager.getProperty("discovery", "search.server");
 		ReportConfigurationService configurationService = new ReportConfigurationService(configDir);
