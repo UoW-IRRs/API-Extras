@@ -13,10 +13,7 @@ import org.dspace.core.I18nUtil;
 import javax.mail.MessagingException;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch
@@ -38,9 +35,11 @@ public class ReportGenerator {
 		} catch (SolrServerException e) {
 			throw new ReportingException("Problem obtaining report data", e);
 		}
-		Email email = Email.getEmail(I18nUtil.getEmailFilename(I18nUtil.getDefaultLocale(), "uow_report_email"));
-		if (email == null) {
-			throw new ConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME);
+		Email email;
+		try {
+			email = Email.getEmail(I18nUtil.getEmailFilename(I18nUtil.getDefaultLocale(), "uow_report_email"));
+		} catch (IOException e) {
+			throw new ConfigurationException("Cannot find e-mail template " + EMAIL_TEMPLATE_NAME, e);
 		}
 		String fileName = createFilename(config, start, end);
 		email.addAttachment(reportDataStream, fileName+".csv", "text/csv;charset=UTF-8");
@@ -84,10 +83,11 @@ public class ReportGenerator {
         if(config == null || start == null || end == null){
             return "agscite-report";
         }
-        String reportName = config.getTitle().toLowerCase();
+        String reportName = config.getTitle();
         if(reportName == null || reportName.equals("")){
             return "agscite-report";
         }
+	    reportName = reportName.toLowerCase();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         reportName = toTitleCase(reportName) + sdf.format(start) + "To" + sdf.format(end);
         reportName = reportName.replaceAll("\\s","");
@@ -96,12 +96,12 @@ public class ReportGenerator {
 
     private static String toTitleCase(String givenString) {
         String[] arr = givenString.split(" ");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < arr.length; i++) {
-            sb.append(Character.toUpperCase(arr[i].charAt(0)))
-                    .append(arr[i].substring(1)).append(" ");
-        }
+	    for (String anArr : arr) {
+		    sb.append(Character.toUpperCase(anArr.charAt(0)))
+				    .append(anArr.substring(1)).append(" ");
+	    }
         return sb.toString().trim();
     }
 
