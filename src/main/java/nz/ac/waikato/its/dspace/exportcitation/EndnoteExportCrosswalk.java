@@ -4,11 +4,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.AuthorizeManager;
-import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
 import org.dspace.content.crosswalk.CrosswalkException;
-import org.dspace.content.crosswalk.StreamDisseminationCrosswalk;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
@@ -19,15 +17,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch and the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for Waikato University ITS
  */
-public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
+public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 	private static final String SEPARATOR = "  - ";
 	private static final String FIELD_NAME_TOP_LEVEL_TYPE = "TY";
 	private static final String END_OF_RECORD = "ER";
@@ -105,22 +104,48 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 	}
 
 	@Override
-	public boolean canDisseminate(Context context, DSpaceObject dso) {
+	public boolean canDisseminate(Context context, Item item) {
 		try {
-			return dso != null && dso.getType() == Constants.ITEM && AuthorizeManager.authorizeActionBoolean(context, dso, Constants.READ, true);
+			return item != null && AuthorizeManager.authorizeActionBoolean(context, item, Constants.READ, true);
 		} catch (SQLException e) {
-			log.warn("Cannot determine whether item id=" + dso.getID() + " is readable by current user, assuming no", e);
+			log.warn("Cannot determine whether item id=" + item.getID() + " is readable by current user, assuming no", e);
 			return false;
 		}
 	}
 
 	@Override
-	public void disseminate(Context context, DSpaceObject dso, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
-		if (!canDisseminate(context, dso)) {
+	public void disseminate(Context context, Item item, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+		if (!canDisseminate(context, item)) {
 			throw new CrosswalkException("Cannot disseminate object (null or non-item object type)");
 		}
-		Item item = (Item) dso;
 
+		writeHeader(out);
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
+
+		processSingleItem(item, writer);
+
+		writer.close();
+		out.flush();
+	}
+
+	@Override
+	public void disseminateList(Context context, List<Item> items, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+		writeHeader(out);
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
+
+		for (Item item : items) {
+			if (canDisseminate(context, item)) {
+				processSingleItem(item, writer);
+			} else {
+				log.warn("Cannot disseminate " + item.getTypeText() + " id=" + item.getID() + ", skipping");
+			}
+		}
+
+		writer.close();
+		out.flush();
+	}
+
+	private void processSingleItem(Item item, BufferedWriter writer) throws IOException {
 		StringBuilder result = new StringBuilder();
 
 		processField(item, result, FIELD_NAME_TOP_LEVEL_TYPE);
@@ -130,11 +155,9 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 			}
 		}
 		appendLine(result, END_OF_RECORD, "");
+		result.append("\n\n");
 
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
 		writer.append(result);
-		writer.close();
-		out.flush();
 	}
 
 	private void processField(Item item, StringBuilder result, String field) {
@@ -180,4 +203,5 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 	public String getMIMEType() {
 		return "application/x-research-info-systems";
 	}
+
 }
