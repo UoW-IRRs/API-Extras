@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -27,7 +28,7 @@ import java.util.regex.Pattern;
 /**
  * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch and the LCoNZ Institutional Research Repositories
  */
-public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
+public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 	private static final String SEPARATOR = "  - ";
 	private static final String FIELD_NAME_TOP_LEVEL_TYPE = "TY";
 	private static final String END_OF_RECORD = "ER";
@@ -119,8 +120,34 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 		if (!canDisseminate(context, dso)) {
 			throw new CrosswalkException("Cannot disseminate object (null or non-item object type)");
 		}
-		Item item = (Item) dso;
 
+		writeHeader(out);
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
+
+		processSingleItem((Item) dso, writer);
+
+		writer.close();
+		out.flush();
+	}
+
+	@Override
+	public void disseminateList(Context context, List<DSpaceObject> dsos, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+		writeHeader(out);
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
+
+		for (DSpaceObject dso : dsos) {
+			if (canDisseminate(context, dso)) {
+				processSingleItem((Item) dso, writer);
+			} else {
+				log.warn("Cannot disseminate " + dso.getTypeText() + " id=" + dso.getID() + ", skipping");
+			}
+		}
+
+		writer.close();
+		out.flush();
+	}
+
+	private void processSingleItem(Item item, BufferedWriter writer) throws IOException {
 		StringBuilder result = new StringBuilder();
 
 		processField(item, result, FIELD_NAME_TOP_LEVEL_TYPE);
@@ -130,11 +157,9 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 			}
 		}
 		appendLine(result, END_OF_RECORD, "");
+		result.append("\n\n");
 
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
 		writer.append(result);
-		writer.close();
-		out.flush();
 	}
 
 	private void processField(Item item, StringBuilder result, String field) {
@@ -180,4 +205,5 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 	public String getMIMEType() {
 		return "application/x-research-info-systems";
 	}
+
 }
