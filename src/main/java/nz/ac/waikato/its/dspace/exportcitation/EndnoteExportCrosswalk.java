@@ -4,11 +4,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.AuthorizeManager;
-import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
 import org.dspace.content.crosswalk.CrosswalkException;
-import org.dspace.content.crosswalk.StreamDisseminationCrosswalk;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
@@ -26,7 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author Andrea Schweer schweer@waikato.ac.nz for AgResearch and the LCoNZ Institutional Research Repositories
+ * @author Andrea Schweer schweer@waikato.ac.nz for Waikato University ITS
  */
 public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 	private static final String SEPARATOR = "  - ";
@@ -106,40 +104,40 @@ public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 	}
 
 	@Override
-	public boolean canDisseminate(Context context, DSpaceObject dso) {
+	public boolean canDisseminate(Context context, Item item) {
 		try {
-			return dso != null && dso.getType() == Constants.ITEM && AuthorizeManager.authorizeActionBoolean(context, dso, Constants.READ, true);
+			return item != null && AuthorizeManager.authorizeActionBoolean(context, item, Constants.READ, true);
 		} catch (SQLException e) {
-			log.warn("Cannot determine whether item id=" + dso.getID() + " is readable by current user, assuming no", e);
+			log.warn("Cannot determine whether item id=" + item.getID() + " is readable by current user, assuming no", e);
 			return false;
 		}
 	}
 
 	@Override
-	public void disseminate(Context context, DSpaceObject dso, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
-		if (!canDisseminate(context, dso)) {
+	public void disseminate(Context context, Item item, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+		if (!canDisseminate(context, item)) {
 			throw new CrosswalkException("Cannot disseminate object (null or non-item object type)");
 		}
 
 		writeHeader(out);
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
 
-		processSingleItem((Item) dso, writer);
+		processSingleItem(item, writer);
 
 		writer.close();
 		out.flush();
 	}
 
 	@Override
-	public void disseminateList(Context context, List<DSpaceObject> dsos, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+	public void disseminateList(Context context, List<Item> items, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
 		writeHeader(out);
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CHARSET));
 
-		for (DSpaceObject dso : dsos) {
-			if (canDisseminate(context, dso)) {
-				processSingleItem((Item) dso, writer);
+		for (Item item : items) {
+			if (canDisseminate(context, item)) {
+				processSingleItem(item, writer);
 			} else {
-				log.warn("Cannot disseminate " + dso.getTypeText() + " id=" + dso.getID() + ", skipping");
+				log.warn("Cannot disseminate " + item.getTypeText() + " id=" + item.getID() + ", skipping");
 			}
 		}
 

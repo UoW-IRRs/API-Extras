@@ -6,6 +6,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.dspace.authorize.AuthorizeException;
+import org.dspace.authorize.AuthorizeManager;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by andrea on 29/08/15.
+ * @author Andrea Schweer schweer@waikato.ac.nz for Waikato University ITS
  */
 public class WordCitationExportCrosswalk implements CitationDisseminationCrosswalk {
     private static final Logger log = Logger.getLogger(WordCitationExportCrosswalk.class);
@@ -31,15 +32,20 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
     }
 
     @Override
-    public boolean canDisseminate(Context context, DSpaceObject dso) {
-        return dso != null && dso.getType() == Constants.ITEM;
+    public boolean canDisseminate(Context context, Item item) {
+        try {
+            return item != null && AuthorizeManager.authorizeActionBoolean(context, item, Constants.READ, true);
+        } catch (SQLException e) {
+            log.warn("Cannot determine whether item id=" + item.getID() + " is readable by current user, assuming no", e);
+            return false;
+        }
     }
 
     @Override
-    public void disseminate(Context context, DSpaceObject dso, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+    public void disseminate(Context context, Item item, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
         XWPFDocument document = new XWPFDocument();
 
-        processSingleItem((Item) dso, document);
+        processSingleItem(item, document);
 
         document.write(out);
         out.flush();
@@ -84,14 +90,14 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
     }
 
     @Override
-    public void disseminateList(Context context, List<DSpaceObject> dsos, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
+    public void disseminateList(Context context, List<Item> items, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
         XWPFDocument document = new XWPFDocument();
 
-        for (DSpaceObject dso : dsos) {
-            if (canDisseminate(context, dso)) {
-                processSingleItem((Item)dso, document);
+        for (Item item : items) {
+            if (canDisseminate(context, item)) {
+                processSingleItem(item, document);
             } else {
-                log.warn("Cannot disseminate " + dso.getTypeText() + " id=" + dso.getID() + ", skipping");
+                log.warn("Cannot disseminate " + item.getTypeText() + " id=" + item.getID() + ", skipping");
             }
         }
 
