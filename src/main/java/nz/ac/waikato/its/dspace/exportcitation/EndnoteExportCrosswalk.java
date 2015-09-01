@@ -3,6 +3,7 @@ package nz.ac.waikato.its.dspace.exportcitation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
+import org.dspace.authorize.AuthorizeManager;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
@@ -105,7 +106,12 @@ public class EndnoteExportCrosswalk implements StreamDisseminationCrosswalk {
 
 	@Override
 	public boolean canDisseminate(Context context, DSpaceObject dso) {
-		return dso != null && dso.getType() == Constants.ITEM;
+		try {
+			return dso != null && dso.getType() == Constants.ITEM && AuthorizeManager.authorizeActionBoolean(context, dso, Constants.READ, true);
+		} catch (SQLException e) {
+			log.warn("Cannot determine whether item id=" + dso.getID() + " is readable by current user, assuming no", e);
+			return false;
+		}
 	}
 
 	@Override
