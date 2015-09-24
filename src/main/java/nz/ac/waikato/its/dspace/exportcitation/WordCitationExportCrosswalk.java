@@ -2,17 +2,20 @@ package nz.ac.waikato.its.dspace.exportcitation;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.model.XWPFHyperlinkDecorator;
+import org.apache.poi.xwpf.usermodel.*;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.AuthorizeManager;
-import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.Metadatum;
 import org.dspace.content.crosswalk.CrosswalkException;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
+import org.dspace.handle.HandleManager;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHyperlink;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTText;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -45,20 +48,45 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
     public void disseminate(Context context, Item item, OutputStream out) throws CrosswalkException, IOException, SQLException, AuthorizeException {
         XWPFDocument document = new XWPFDocument();
 
-        processSingleItem(item, document);
+        String citationText = getFirstNonBlankValue(item, "dc", "identifier", "citation");
+        String abstractText = getFirstNonBlankValue(item, "dc", "description", "abstract");
+        String handleUrl = HandleManager.getCanonicalForm(item.getHandle());
+
+        processSingleItem(document, citationText, abstractText, handleUrl);
 
         document.write(out);
         out.flush();
     }
 
-    private void processSingleItem(Item item, XWPFDocument document) {
-        String citationText = getFirstNonBlankValue(item, "dc", "identifier", "citation");
-        String abstractText = getFirstNonBlankValue(item, "dc", "description", "abstract");
-
+    void processSingleItem(XWPFDocument document, String citationText, String abstractText, String handleUrl) {
         XWPFParagraph para = document.createParagraph();
         XWPFRun run = para.createRun();
-        run.setText(citationText);
+        run.setText(StringUtils.isNotBlank(citationText) ? citationText : "(no citation)");
         para.setSpacingAfter(200);
+
+        if (StringUtils.isNotBlank(handleUrl)) {
+            // from http://stackoverflow.com/a/22456273/72625
+            String linkId = document.getPackagePart().addExternalRelationship(handleUrl, XWPFRelation.HYPERLINK.getRelation()).getId();
+
+            para = document.createParagraph();
+            para.setSpacingAfter(200);
+
+            para.createRun().setText("AgScite record: ");
+
+            CTHyperlink link = para.getCTP().addNewHyperlink();
+            link.setId(linkId);
+
+            CTText linkText = CTText.Factory.newInstance();
+            linkText.setStringValue(handleUrl);
+
+            CTR ctr = CTR.Factory.newInstance();
+            ctr.setTArray(new CTText[]{linkText});
+
+            ctr.addNewRPr().addNewColor().setVal("0000FF");
+            ctr.addNewRPr().addNewU().setVal(STUnderline.SINGLE);
+
+            link.setRArray(new CTR[]{ctr});
+        }
 
         if (includeAbstract && StringUtils.isNotBlank(abstractText)) {
             // split md string at double newline so we can create actual paragraphs
@@ -69,6 +97,7 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
                 run = para.createRun();
                 run.setText(abstractPara);
                 para.setSpacingAfter(200);
+                para.setIndentationLeft(200);
             }
         }
         para.setSpacingAfter(600); // override spacing for final para
@@ -95,7 +124,11 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
 
         for (Item item : items) {
             if (canDisseminate(context, item)) {
-                processSingleItem(item, document);
+                String citationText = getFirstNonBlankValue(item, "dc", "identifier", "citation");
+                String abstractText = getFirstNonBlankValue(item, "dc", "description", "abstract");
+                String handleUrl = HandleManager.getCanonicalForm(item.getHandle());
+
+                processSingleItem(document, citationText, abstractText, handleUrl);
             } else {
                 log.warn("Cannot disseminate " + item.getTypeText() + " id=" + item.getID() + ", skipping");
             }
