@@ -2,8 +2,11 @@ package nz.ac.waikato.its.dspace.exportcitation;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.poi.xwpf.model.XWPFHyperlinkDecorator;
-import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRelation;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.xmlbeans.impl.xb.xmlschema.SpaceAttribute;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.AuthorizeManager;
 import org.dspace.content.Item;
@@ -71,7 +74,10 @@ public class WordCitationExportCrosswalk implements CitationDisseminationCrosswa
             para = document.createParagraph();
             para.setSpacingAfter(200);
 
-            para.createRun().setText("AgScite record: ");
+            XWPFRun linkPrefix = para.createRun();
+            CTText linkPrefixText = linkPrefix.getCTR().addNewT();
+            linkPrefixText.setStringValue("AgScite record: ");
+            linkPrefixText.setSpace(SpaceAttribute.Space.PRESERVE);
 
             CTHyperlink link = para.getCTP().addNewHyperlink();
             link.setId(linkId);
