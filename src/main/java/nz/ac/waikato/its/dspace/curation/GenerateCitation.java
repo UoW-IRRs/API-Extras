@@ -1,6 +1,6 @@
-package nz.ac.lconz.irr.curate.task;
+package nz.ac.waikato.its.dspace.curation;
 
-import nz.ac.lconz.irr.crosswalk.citeproc.CiteprocCrosswalk;
+import nz.ac.waikato.its.dspace.citeproc.CiteprocCrosswalk;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
@@ -70,11 +70,9 @@ public class GenerateCitation extends AbstractCurationTask {
 			return Curator.CURATE_SKIP;
 		}
 
-		Context context = null;
 		String itemJSON;
 		try {
-			context = Curator.curationContext();
-			itemJSON = itemToCiteprocJSON(context, item);
+			itemJSON = itemToCiteprocJSON(Curator.curationContext(), item);
 		} catch (SQLException e) {
 			String message = taskId + "Problem generating citation";
 			log.error(message, e);
@@ -180,9 +178,7 @@ public class GenerateCitation extends AbstractCurationTask {
 			}
 			Object resultObj = engine.eval("makeCitation();");
 			result = resultObj.toString();
-		} catch (ScriptException e) {
-			log.fatal("Cannot make citation", e);
-		} catch (FileNotFoundException e) {
+		} catch (ScriptException | FileNotFoundException e) {
 			log.fatal("Cannot make citation", e);
 		}
 		return result;
