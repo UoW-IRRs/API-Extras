@@ -11,6 +11,8 @@ import org.dspace.content.Metadatum;
  * @author Andrea Schweer schweer@waikato.ac.nz for the UoW ITS Institutional Research Repositories
  */
 public class DateConverter implements Converter {
+	protected boolean fullDate = true;
+
 	@Override
 	public void insertValue(ObjectNode rootNode, String field, Item item, Metadatum[] mdValue, ObjectMapper mapper) {
 		if (mdValue == null || mdValue.length < 1 || mdValue[0] == null || mdValue[0].value == null) {
@@ -20,11 +22,13 @@ public class DateConverter implements Converter {
 		ArrayNode partsArray = mapper.createArrayNode();
 
 		partsArray.add(date.getYear());
-		if (date.getMonth() > 0) {
-			partsArray.add(date.getMonth());
-		}
-		if (date.getDay() > 0) {
-			partsArray.add(date.getDay());
+		if (fullDate) {
+			if (date.getMonth() > 0) {
+				partsArray.add(date.getMonth());
+			}
+			if (date.getDay() > 0) {
+				partsArray.add(date.getDay());
+			}
 		}
 
 		ObjectNode datePartsNode = mapper.createObjectNode();
@@ -32,6 +36,6 @@ public class DateConverter implements Converter {
 		anonymousArray.add(partsArray);
 		datePartsNode.put("date-parts", anonymousArray);
 
-		rootNode.put("issued", datePartsNode);
+		rootNode.put(field, datePartsNode);
 	}
 }
