@@ -24,9 +24,6 @@ public class PostProcessingHelperTest {
 		File result = PostProcessingHelper.runPostProcessors(config, input);
 		result.deleteOnExit();
 
-		System.out.println(FileUtils.readFileToString(expected, "UTF-8"));
-		System.out.println(FileUtils.readFileToString(result, "UTF-8"));
-
 		Assert.assertTrue("Post processing as expected", FileUtils.contentEquals(expected, result));
 	}
 
