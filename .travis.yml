@@ -4,5 +4,4 @@ jdk:
   - oraclejdk7
   - openjdk7
 env:
-  - TZ=Pacific/Auckland
-  - LANG=en_NZ.UTF-8
+  - TZ=Pacific/Auckland LANG=en_NZ.UTF-8
