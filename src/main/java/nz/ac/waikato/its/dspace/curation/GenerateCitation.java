@@ -73,32 +73,12 @@ public class GenerateCitation extends AbstractCurationTask {
 		String itemJSON;
 		try {
 			itemJSON = itemToCiteprocJSON(Curator.curationContext(), item);
-		} catch (SQLException e) {
-			String message = taskId + "Problem generating citation";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
-		} catch (CrosswalkException e) {
-			String message = taskId + "Problem generating citation";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
-		} catch (AuthorizeException e) {
-			String message = taskId + "Problem generating citation";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
+		} catch (SQLException | CrosswalkException | AuthorizeException e) {
+			return exitOnException(e, "Problem generating citation");
 		}
 
 		if (itemJSON == null || "".equals(itemJSON)) {
-			String message = taskId + "Problem extracting metadata from item";
-			log.error(message);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
+			return exitOnException(null, "Problem extracting metadata from item");
 		}
 
 		String citationStyle = taskProperty("style");
@@ -107,11 +87,7 @@ public class GenerateCitation extends AbstractCurationTask {
 		try {
 			citation = makeCitation(itemJSON, citationStyle, citationLocale.replaceAll("_", "-"));
 		} catch (CitationGenerationException e) {
-			String message = taskId + "Problem generating citation";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
+			return exitOnException(e, "Problem generating citation");
 		}
 
 		if (citation == null || "".equals(citation)) {
@@ -129,21 +105,23 @@ public class GenerateCitation extends AbstractCurationTask {
 			item.update();
 			setResult("Added citation " + citation);
 			report("Successfully added citation to item id=" + item.getID());
-		} catch (SQLException e) {
-			String message = taskId + "Problem adding citation to item";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
-		} catch (AuthorizeException e) {
-			String message = taskId + "Problem adding citation to item";
-			log.error(message, e);
-			report(message);
-			setResult(message);
-			return Curator.CURATE_ERROR;
+		} catch (SQLException | AuthorizeException e) {
+			return exitOnException(e, "Problem adding citation to item");
 		}
 
 		return Curator.CURATE_SUCCESS;
+	}
+
+	private int exitOnException(Throwable e, String extraMessage) {
+		String message = taskId + extraMessage;
+		if (e != null) {
+			log.error(message, e);
+		} else {
+			log.error(message);
+		}
+		report(message);
+		setResult(message);
+		return Curator.CURATE_ERROR;
 	}
 
 	private String itemToCiteprocJSON(Context context, Item item) throws CrosswalkException, AuthorizeException, IOException, SQLException {
