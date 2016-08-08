@@ -67,7 +67,7 @@ public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 		fieldTypes = new HashMap<>();
 
 		Pattern keyPattern = Pattern.compile("^field\\.([a-zA-Z0-9\\-]+)$");
-		Pattern valuePattern = Pattern.compile("^([a-zA-Z\\.,]+)(?:\\((\\w+)\\))?$");
+		Pattern valuePattern = Pattern.compile("^([a-zA-Z\\.\\-,]+)(?:\\((\\w+)\\))?$");
 		for (Object key : properties.keySet()) {
 			Matcher keyMatcher = keyPattern.matcher(key.toString());
 			if (keyMatcher.matches()) {
@@ -83,6 +83,8 @@ public class EndnoteExportCrosswalk implements CitationDisseminationCrosswalk {
 							fieldTypes.put(dcField, fieldConverter);
 						}
 					}
+				} else {
+					log.warn("Expected name of DSpace metadata field for EndNote field " + field + ", instead got " + value);
 				}
 			}
 		}
