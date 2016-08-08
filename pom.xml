@@ -4,7 +4,7 @@
 
     <groupId>nz.ac.waikato.its</groupId>
     <artifactId>api-extras</artifactId>
-    <version>5.1.3</version>
+    <version>5.1.4-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>DSpace API add-ons developed by ITS at the University of Waikato</name>
