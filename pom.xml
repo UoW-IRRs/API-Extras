@@ -4,7 +4,7 @@
 
     <groupId>nz.ac.waikato.its</groupId>
     <artifactId>api-extras</artifactId>
-    <version>5.1.4-SNAPSHOT</version>
+    <version>5.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>DSpace API add-ons developed by ITS at the University of Waikato</name>
@@ -56,7 +56,8 @@
       <connection>scm:git:git://github.com/lconz-irr/API-Extras.git</connection>
       <url>https://github.com/lconz-irr/API-Extras</url>
       <developerConnection>scm:git:ssh://git@github.com/lconz-irr/API-Extras.git</developerConnection>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
 
     <distributionManagement>
       <!-- Publish versioned releases here -->
