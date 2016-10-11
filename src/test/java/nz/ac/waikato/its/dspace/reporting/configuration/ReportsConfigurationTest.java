@@ -26,4 +26,17 @@ public class ReportsConfigurationTest {
 		Assert.assertEquals("Canned report size", configuration.getCannedReports().size(), reference.getCannedReports().size());
 	}
 
+	@Test
+	public void testUnmarshalConfigurationWithParent() throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(ReportsConfiguration.class);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		File xml = new File(ClassLoader.getSystemResource("reports-configuration-with-parent.xml").getPath());
+
+		ReportsConfiguration configuration = (ReportsConfiguration) jaxbUnmarshaller.unmarshal(xml);
+
+		Assert.assertEquals(configuration.getCannedReports().size(), 2);
+		Report report = configuration.getCannedReports().iterator().next();
+		Assert.assertNotNull(report.getParent());
+	}
+
 }

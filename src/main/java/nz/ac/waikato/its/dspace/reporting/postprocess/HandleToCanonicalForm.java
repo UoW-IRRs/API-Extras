@@ -2,6 +2,7 @@ package nz.ac.waikato.its.dspace.reporting.postprocess;
 
 import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
 import nz.ac.waikato.its.dspace.reporting.configuration.PostProcess;
+import org.apache.commons.lang.StringUtils;
 import org.dspace.handle.HandleManager;
 
 /**
@@ -16,7 +17,9 @@ public class HandleToCanonicalForm implements PostProcessor {
     @Override
     public String[] processLine(String[] inputLine, int index) throws ConfigurationException, PostProcessingException {
         String[] result = inputLine.clone();
-        result[index] = HandleManager.getCanonicalForm(inputLine[index]);
+        if (StringUtils.isNotBlank(inputLine[index])) {
+            result[index] = HandleManager.getCanonicalForm(inputLine[index]);
+        }
         return result;
     }
 }
