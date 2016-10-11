@@ -22,7 +22,7 @@ import java.util.*;
  */
 @XmlRootElement(namespace = "nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"title", "sorting", "dateField", "maxResults", "fields"})
+@XmlType(propOrder = {"title", "sorting", "dateField", "parent", "maxResults", "fields"})
 public class Report {
 	@XmlAttribute(required = true)
 	private String id;
@@ -35,6 +35,8 @@ public class Report {
 	private Sorting sorting;
 	@XmlElement
 	private String dateField;
+	@XmlElement(defaultValue = "")
+	private String parent;
 	@XmlElement(defaultValue = "10000")
 	private int maxResults = 10000;
 
@@ -76,6 +78,14 @@ public class Report {
 
 	public void setDateField(String dateField) {
 		this.dateField = dateField;
+	}
+
+	public String getParent() {
+		return parent;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 
 	public Sorting getSorting() {
@@ -130,6 +140,10 @@ public class Report {
 
 		if (StringUtils.isNotBlank(dateField)) {
 			query.addFilterQuery(dateField + ":[" + dateToSolr(start, false) + " TO " + dateToSolr(end, true) + "]");
+		}
+
+		if (StringUtils.isNotBlank(parent)) {
+			query.addFilterQuery("location:(" + parent + ")");
 		}
 
 		if (sorting != null) {
@@ -188,6 +202,7 @@ public class Report {
 
 		if (maxResults != report.maxResults) return false;
 		if (dateField != null ? !dateField.equals(report.dateField) : report.dateField != null) return false;
+		if (parent != null ? !parent.equals(report.parent) : report.parent != null) return false;
 		if (!fields.equals(report.fields)) return false;
 		if (!id.equals(report.id)) return false;
         if (!title.equals(report.title)) return false;
@@ -202,6 +217,7 @@ public class Report {
 		result = 31 * result + fields.hashCode();
 		result = 31 * result + (sorting != null ? sorting.hashCode() : 0);
 		result = 31 * result + (dateField != null ? dateField.hashCode() : 0);
+		result = 31 * result + (parent != null ? parent.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
 		result = 31 * result + maxResults;
 		return result;
@@ -215,6 +231,7 @@ public class Report {
 				       ", fields=" + fields +
 				       ", sorting=" + sorting +
 				       ", dateField='" + dateField + '\'' +
+				       ", parent='" + parent + "'" +
 				       ", maxResults=" + maxResults +
 				       '}';
 	}

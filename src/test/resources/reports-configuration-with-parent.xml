@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reportsConfiguration xmlns:ns2="nz.ac.waikato.its.dspace.reporting.configuration.ReportsConfiguration">
+    <cannedReports>
+        <report id="report1">
+            <title>All outputs by Group and Team</title>
+            <sorting fieldName="dc.date.accessioned_dt">
+                <order>asc</order>
+            </sorting>
+            <dateField>dc.date.accessioned_dt</dateField>
+            <parent>m3</parent>
+            <maxResults>10000</maxResults>
+            <fields>
+                <field name="group_keyword" header="AgResearch_Group"/>
+                <field name="team_keyword" header="AgResearch_Team"/>
+                <field name="dc.type" header="Output_Type"/>
+                <field name="agresearch.subtype" header="Output_Subtype"/>
+                <field name="dc.title" header="Title"/>
+                <field name="dc.date.accessioned_dt" header="Date_Submitted">
+                    <postProcess class="nz.ac.waikato.its.dspace.reporting.postprocess.ReformatDates">
+                        <params>
+                            <param name="format" value="MMMM YYYY"/>
+                        </params>
+                    </postProcess>
+                </field>
+                <field name="dc.identifier.citation" header="Citation"/>
+                <field name="handle" header="AgScite_Handle"/>
+            </fields>
+        </report>
+        <report id="report2">
+            <title>Group outputs</title>
+            <sorting fieldName="dc.date.accessioned_dt">
+                <order>asc</order>
+            </sorting>
+            <dateField>dc.date.accessioned_dt</dateField>
+            <maxResults>10000</maxResults>
+            <fields>
+                <field name="group_keyword" header="AgResearch_Group" valuesMode="pick"/>
+                <field name="team_keyword" header="AgResearch_Team"/>
+                <field name="dc.type" header="Output_Type"/>
+                <field name="agresearch.subtype" header="Output_Subtype"/>
+                <field name="dc.title" header="Title"/>
+                <field name="dc.date.accessioned_dt" header="Date_Submitted">
+                    <postProcess class="nz.ac.waikato.its.dspace.reporting.postprocess.ReformatDates">
+                        <params>
+                            <param name="format" value="MMMM YYYY"/>
+                        </params>
+                    </postProcess>
+                </field>
+                <field name="dc.identifier.citation" header="Citation"/>
+                <field name="handle" header="AgScite_Handle"/>
+            </fields>
+        </report>
+    </cannedReports>
+</reportsConfiguration>

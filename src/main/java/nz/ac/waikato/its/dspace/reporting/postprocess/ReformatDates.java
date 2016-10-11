@@ -2,6 +2,7 @@ package nz.ac.waikato.its.dspace.reporting.postprocess;
 
 import nz.ac.waikato.its.dspace.reporting.configuration.ConfigurationException;
 import nz.ac.waikato.its.dspace.reporting.configuration.PostProcess;
+import org.apache.commons.lang.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,11 +36,13 @@ public class ReformatDates implements PostProcessor {
 			throw new ConfigurationException("This post processor hasn't been configured yet");
 		}
 		String[] result = inputLine.clone();
-		try {
-			Date date = sourceFormat.parse(inputLine[index]);
-			result[index] = targetFormat.format(date);
-		} catch (ParseException e) {
-			throw new PostProcessingException("Could not reformat index " + index + " of line: " + e.getMessage(), e);
+		if (StringUtils.isNotBlank(inputLine[index])) {
+			try {
+				Date date = sourceFormat.parse(inputLine[index]);
+				result[index] = targetFormat.format(date);
+			} catch (ParseException e) {
+				throw new PostProcessingException("Could not reformat index " + index + " of line: " + e.getMessage(), e);
+			}
 		}
 		return result;
 	}
