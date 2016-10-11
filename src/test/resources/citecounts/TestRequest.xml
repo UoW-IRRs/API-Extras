@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns="http://www.isinet.com/xrpc42">
+    <fn name="LinksAMR.retrieve">
+        <list>
+            <map/>
+            <map>
+                <list name="WOS">
+                    <val>timesCited</val>
+                    <val>sourceURL</val>
+                    <val>citingArticlesURL</val>
+                </list>
+            </map>
+            <map>
+                <map name="10289_198">
+                    <val name="doi">10.1016/S0020-1693(03)00298-6</val>
+                </map>
+                <map name="10289_213">
+                    <val name="doi">10.1016/j.jorganchem.2006.02.020</val>
+                </map>
+                <map name="10289_169">
+                    <val name="doi">10.1016/j.ica.2003.11.049</val>
+                </map>
+                <map name="10289_160">
+                    <val name="doi">10.1002/apj.69</val>
+                </map>
+                <map name="10289_4010">
+                    <val name="doi">10.1111/j.1467-9809.2010.00885.x</val>
+                </map>
+                <map name="10289_226">
+                    <val name="doi">10.1021/om7004707</val>
+                </map>
+                <map name="10289_161">
+                    <val name="doi">10.1016/S0020-1693(00)00382-0</val>
+                </map>
+                <map name="10289_152">
+                    <val name="doi">10.1016/j.jorganchem.2004.02.026</val>
+                </map>
+                <map name="10289_2071">
+                    <val name="doi">10.1080/10382040208667499</val>
+                </map>
+                <map name="10289_128">
+                    <val name="doi">10.1016/S0022-328X(00)00817-2</val>
+                </map>
+                <map name="10289_184">
+                    <val name="doi">10.1016/S0022-328X(01)01356-0</val>
+                </map>
+                <map name="10289_165">
+                    <val name="doi">10.1016/j.poly.2006.06.034</val>
+                </map>
+                <map name="10289_192">
+                    <val name="doi">10.1016/S0020-1693(01)00473-X</val>
+                </map>
+                <map name="10289_212">
+                    <val name="doi">10.1016/S0022-328X(02)02024-7</val>
+                </map>
+                <map name="10289_211">
+                    <val name="doi">10.1021/np030104y</val>
+                </map>
+                <map name="10289_149">
+                    <val name="doi">10.1016/j.jorganchem.2005.09.049</val>
+                </map>
+                <map name="10289_3383">
+                    <val name="doi">10.2167/le801.0</val>
+                </map>
+                <map name="10289_439">
+                    <val name="doi">10.1177/0163443707078425</val>
+                </map>
+                <map name="10289_3930">
+                    <val name="doi">10.1016/j.jhydrol.2006.11.014</val>
+                </map>
+                <map name="10289_937">
+                    <val name="doi">10.1017/S0032247403003334</val>
+                </map>
+                <map name="10289_158">
+                    <val name="doi">10.1016/j.steroids.2004.07.003</val>
+                </map>
+                <map name="10289_133">
+                    <val name="doi">10.1016/j.jorganchem.2007.01.009</val>
+                </map>
+                <map name="10289_442">
+                    <val name="doi">10.1080/09515080220127116.</val>
+                </map>
+                <map name="10289_1387">
+                    <val name="doi">10.1086/521091</val>
+                </map>
+                <map name="10289_447">
+                    <val name="doi">10.1007/BF01128205</val>
+                </map>
+                <map name="10289_955">
+                    <val name="doi">10.1017/S0024282905005384</val>
+                </map>
+                <map name="10289_159">
+                    <val name="doi">10.1016/S0162-0134(01)00173-8</val>
+                </map>
+                <map name="10289_208">
+                    <val name="doi">10.1039/b003619f</val>
+                </map>
+                <map name="10289_189">
+                    <val name="doi">10.1016/j.steroids.2003.12.004</val>
+                </map>
+                <map name="10289_185">
+                    <val name="doi">10.1016/j.ica.2003.10.037</val>
+                </map>
+                <map name="10289_3404">
+                    <val name="doi">10.1016/S1387-7003(01)00309-4</val>
+                </map>
+                <map name="10289_936">
+                    <val name="doi">10.1017/S1355771801001030</val>
+                </map>
+                <map name="10289_222">
+                    <val name="doi">10.1007/s11101-004-6146-2</val>
+                </map>
+                <map name="10289_220">
+                    <val name="doi">10.1016/S0022-328X(02)02224-6</val>
+                </map>
+                <map name="10289_2707">
+                    <val name="doi">10.1016/j.ijresmar.2008.06.006</val>
+                </map>
+                <map name="10289_1566">
+                    <val name="doi">10.3842/SIGMA.2008.008</val>
+                </map>
+                <map name="10289_127">
+                    <val name="doi">10.1039/b208374b</val>
+                </map>
+                <map name="10289_436">
+                    <val name="doi">10.1080/10714420701528057</val>
+                </map>
+                <map name="10289_771">
+                    <val name="doi">10.1179/026708304225012314</val>
+                </map>
+                <map name="10289_181">
+                    <val name="doi">10.1016/j.ica.2006.02.009</val>
+                </map>
+                <map name="10289_560">
+                    <val name="doi">10.1177/0893318901152007</val>
+                </map>
+                <map name="10289_1447">
+                    <val name="doi">10.1007/b104336</val>
+                </map>
+                <map name="10289_559">
+                    <val name="doi">10.1207/s1532754xjprr1701_5</val>
+                </map>
+                <map name="10289_3929">
+                    <val name="doi">10.1016/S0309-1708(03)00047-2</val>
+                </map>
+                <map name="10289_1339">
+                    <val name="doi">10.1145/996350.996372</val>
+                </map>
+                <map name="10289_155">
+                    <val name="doi">10.1039/b107929h</val>
+                </map>
+                <map name="10289_202">
+                    <val name="doi">10.1016/j.ica.2005.07.046</val>
+                </map>
+                <map name="10289_170">
+                    <val name="doi">10.1016/S0020-1693(02)00811-3</val>
+                </map>
+                <map name="10289_2882">
+                    <val name="doi">10.1039/b805024d</val>
+                </map>
+                <map name="10289_2884">
+                    <val name="doi">10.1021/cm000910f</val>
+                </map>
+            </map>
+        </list>
+    </fn>
+</request>

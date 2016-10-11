@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<response xmlns="http://www.isinet.com/xrpc42">
+    <fn name="LinksAMR.retrieve" rc="OK">
+        <map>
+            <map name="10289_202">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000234613800020&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">27</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000234613800020&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_1447">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_3383">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_208">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000088759200015&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">32</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000088759200015&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_198">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000187360900056&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">4</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000187360900056&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_439">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000248225800006&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">7</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000248225800006&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_158">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000224623300014&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">4</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000224623300014&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_3930">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000245300300002&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">8</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000245300300002&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_149">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000235126800019&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">6</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000235126800019&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_159">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000168678000008&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">5</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000168678000008&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_436">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_771">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222076300004&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">22</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222076300004&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_155">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000173477100021&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">57</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000173477100021&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_1387">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000249699200045&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">5</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000249699200045&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_152">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000221159500030&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">1</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000221159500030&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_170">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000176600300016&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">11</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000176600300016&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_3929">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000183206600001&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">8</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000183206600001&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_3404">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000172933400015&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">5</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000172933400015&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_955">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000234734600007&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">15</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000234734600007&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_2882">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000258222300005&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">15</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000258222300005&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_2884">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167646200048&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">98</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167646200048&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_447">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_169">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222053400005&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">8</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222053400005&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_133">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000246323200001&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">1</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000246323200001&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_2707">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000264728700002&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">21</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000264728700002&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_165">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000243850500025&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">6</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000243850500025&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_442">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_160">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000255242000007&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">12</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000255242000007&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_161">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167746200006&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">13</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167746200006&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_1566">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000267267800008&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">25</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000267267800008&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_181">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000244993400010&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">24</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000244993400010&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_226">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000248865600038&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">11</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000248865600038&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_220">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000181731200015&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">4</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000181731200015&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_936">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_937">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000226634700006&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">10</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000226634700006&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_222">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_127">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000179731600026&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">12</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000179731600026&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_128">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167246400021&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">9</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000167246400021&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_559">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_192">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000170965000013&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">21</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000170965000013&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_212">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000179812700035&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">14</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000179812700035&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_213">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000237995400026&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">10</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000237995400026&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_211">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000184942300008&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">15</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000184942300008&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_1339">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_560">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_184">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_185">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000221011100012&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">16</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000221011100012&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_4010">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+            <map name="10289_189">
+                <map name="WOS">
+                    <val name="sourceURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222253300002&DestLinkType=FullRecord&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                    <val name="timesCited">5</val>
+                    <val name="citingArticlesURL"><![CDATA[http://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=PARTNER_APP&SrcAuth=LinksAMR&KeyUT=WOS:000222253300002&DestLinkType=CitingArticles&DestApp=ALL_WOS&UsrCustomerID=361a7c8f0a33fd6c66ab5b004b3aea5f]]></val>
+                </map>
+            </map>
+            <map name="10289_2071">
+                <map name="WOS">
+                    <val name="message">No Result Found</val>
+                </map>
+            </map>
+        </map>
+    </fn>
+</response>
