@@ -80,7 +80,7 @@
       <connection>scm:git:git://github.com/lconz-irr/API-Extras.git</connection>
       <url>https://github.com/lconz-irr/API-Extras</url>
       <developerConnection>scm:git:ssh://git@github.com/lconz-irr/API-Extras.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>api-extras_5.1.x</tag>
   </scm>
 
     <distributionManagement>
