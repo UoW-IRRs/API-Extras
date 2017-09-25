@@ -77,9 +77,9 @@
     </dependencies>
 
     <scm>
-      <connection>scm:git:git://github.com/lconz-irr/API-Extras.git</connection>
-      <url>https://github.com/lconz-irr/API-Extras</url>
-      <developerConnection>scm:git:ssh://git@github.com/lconz-irr/API-Extras.git</developerConnection>
+      <connection>scm:git:git://github.com/UoW-IRRs/API-Extras.git</connection>
+      <url>https://github.com/UoW-IRRs/API-Extras</url>
+      <developerConnection>scm:git:ssh://git@github.com/UoW-IRRs/API-Extras.git</developerConnection>
       <tag>api-extras_5.1.x</tag>
   </scm>
 
