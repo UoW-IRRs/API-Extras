@@ -29,10 +29,6 @@ public class NotifyOnArchiveWhenMetadataPresent implements Consumer {
     private String templateName;
     private List<String> recipients = new ArrayList<>();
 
-    private String itemHandle = null;
-    private List<String> fieldValues;
-    private boolean send = false;
-
     @Override
     public void initialize() throws Exception {
         metadataField = ConfigurationManager.getProperty("api-extras", "notify_archive_with-metadata.field");
@@ -76,15 +72,33 @@ public class NotifyOnArchiveWhenMetadataPresent implements Consumer {
             }
         }
 
-        fieldValues = values;
-        itemHandle = HandleManager.getCanonicalForm(item.getHandle());
+        String itemHandle = HandleManager.getCanonicalForm(item.getHandle());
 
-        if (fieldValues.isEmpty() || StringUtils.isBlank(itemHandle)) {
+        if (values.isEmpty() || StringUtils.isBlank(itemHandle)) {
             log.warn("No values for field " + metadataField + " or item has no handle, not notifying");
             return;
         }
 
-        send = true;
+        String emailFileName = I18nUtil.getEmailFilename(Locale.getDefault(), templateName);
+        if (StringUtils.isBlank(emailFileName)) {
+            log.error("Cannot obtain email filename for template " + templateName + " and locale " + Locale.getDefault());
+            return;
+        }
+
+        try {
+            Email email = Email.getEmail(emailFileName);
+
+            for (String recipient : recipients) {
+                email.addRecipient(recipient);
+            }
+
+            email.addArgument(itemHandle);
+            email.addArgument(StringUtils.join(values, "; "));
+
+            email.send();
+        } catch (Exception e) {
+            log.error("Caught exception while trying to send notification: " + e.getMessage(), e);
+        }
     }
 
     private boolean itemPassesContainerConstraint(Item item, List<String> containerHandles) throws SQLException {
@@ -109,33 +123,11 @@ public class NotifyOnArchiveWhenMetadataPresent implements Consumer {
 
     @Override
     public void end(Context ctx) throws Exception {
-        if (!send) {
-            // nothing to do
-            return;
-        }
-
-        String emailFileName = I18nUtil.getEmailFilename(Locale.getDefault(), templateName);
-        if (StringUtils.isBlank(emailFileName)) {
-            log.error("Cannot obtain email filename for template " + templateName + " and locale " + Locale.getDefault());
-            return;
-        }
-
-        Email email = Email.getEmail(emailFileName);
-
-        for (String recipient : recipients) {
-            email.addRecipient(recipient);
-        }
-
-        email.addArgument(itemHandle);
-        email.addArgument(StringUtils.join(fieldValues, "; "));
-
-        email.send();
+        // no-op
     }
 
     @Override
     public void finish(Context ctx) throws Exception {
-        itemHandle = null;
-        fieldValues = null;
-        send = false;
+        // no-op
     }
 }
